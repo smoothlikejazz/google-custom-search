@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+    <style>
+        body{
+            background-color: #ccc;
+        }
+        .my-search{
+
+        }
+        .gsc-input{
+            background: none !important;
+        }
+        .display-results-container{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<div class="row">
+    <div class="col-md-3 pull-right">
+        <div>
+            <input type="text" class="custom-programatic-search" id="my-search">
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        Donec sit amet finibus mi, ut rutrum orci. Vivamus iaculis lacus aliquam tempus cursus. Morbi malesuada nisi in felis volutpat pulvinar. Sed non lorem velit. Nullam et lacinia urna, et semper urna. Aenean sagittis posuere erat, vitae ultricies velit dictum at. Suspendisse potenti. Maecenas sit amet pretium dui. Donec semper, tellus et laoreet ullamcorper, massa tortor imperdiet purus, quis maximus lacus turpis rutrum felis. Curabitur id placerat ante, a ultrices augue. Vestibulum tincidunt tempor metus vel efficitur. Sed ultricies risus et aliquam sodales.
+    </div>
+</div>
+
+
+<div  class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <h3>Search Results Hidden Or shown div styled in your modal pop up or wherever you want</h3>
+    </div>
+</div>
+<div class="row display-results-container" >
+    <div class="col-md-6 col-md-offset-3">
+        <div class="buttons">
+            <div class="google-search-close">X (Close)</div>
+        </div>
+        <div id="display-results-target">
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://www.google.com/jsapi"></script>
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript">
+    google.load('search', '1');
+    google.setOnLoadCallback(function(){
+        var googleSearch = new google.search.CustomSearchControl('008490904345110132257:4iq41vh7or8');
+
+        var drawOptions = new google.search.DrawOptions();
+        drawOptions.enableSearchResultsOnly();
+        googleSearch.draw('display-results-target', drawOptions);
+
+        $("#my-search").on("keyup", function(event){
+            if (event.keyCode == 13) {
+                googleSearch.execute($(event.target).val());
+                $(".display-results-container").show();
+            }
+        });
+
+        $(".google-search-close").on('click', function(){
+            $(".display-results-container").hide();
+        });
+
+    }, true);
+</script>
+</body>
+</html>
