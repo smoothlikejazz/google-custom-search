@@ -23,6 +23,7 @@
         }
         .display-results-container{
             display: none;
+            background-color:#fff;
         }
     </style>
 
@@ -69,21 +70,32 @@
 <script type="text/javascript">
     google.load('search', '1');
     google.setOnLoadCallback(function(){
-        var googleSearch = new google.search.CustomSearchControl('008490904345110132257:4iq41vh7or8');
+        var googleSearch = new google.search.CustomSearchControl('008490904345110132257:4iq41vh7or8');  // <- Use your id here
 
         var drawOptions = new google.search.DrawOptions();
-        drawOptions.enableSearchResultsOnly();
+        drawOptions.enableSearchResultsOnly();    // <- specifies we want to display results only in the target specified below
         googleSearch.draw('display-results-target', drawOptions);
 
         $("#my-search").on("keyup", function(event){
             if (event.keyCode == 13) {
                 googleSearch.execute($(event.target).val());
-                $(".display-results-container").show();
+                $(".display-results-container").show();   // <- Hide show as you have had on your modal when items is searched
             }
         });
 
         $(".google-search-close").on('click', function(){
-            $(".display-results-container").hide();
+            $(".display-results-container").hide();    // <- Here you can do your remove the modal from view
+        });
+
+
+        /*
+         *  simulating for when clicking outside the container it should close the modal
+         */
+        $(".display-results-container").click( function(e){
+            e.stopPropagation();
+        });
+        $("body").click( function(e){
+            $('.display-results-container').hide();
         });
 
     }, true);
